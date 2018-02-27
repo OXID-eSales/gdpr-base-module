@@ -1,0 +1,77 @@
+.oegdprbase-delete-shipping-address-button {
+    display: none;
+}
+.modal {
+    display: none;
+}
+.oegdprbase-modal .close {
+    display: none;
+}
+.modal-footer {
+    text-align: right;
+}
+
+#oegdprbase_delete_my_account_confirmation.ui-dialog-content {
+    padding-top: 7px;
+    padding-bottom: 10px;
+}
+
+.modal-header {
+    font-weight: bold;
+    margin-bottom: 2em;
+    color: #EC6105;
+}
+
+.modal-header h3 {
+    margin-right: 7px;
+}
+
+.modal-header img.oegdprbase-close {
+    float: right;
+    margin-top: 3px;
+}
+
+
+.modal-body {
+    margin-bottom: 1em;
+    color: #29373c;
+}
+
+.modal-footer {
+    text-align: right;
+}
+
+.ui-dialog-content .textButton {
+    text-transform: uppercase;
+    margin-right: 10px;
+}
+
+div.widgetBox.reviews.oegdprbase_account_reviewlist div.listRefine {
+    border-top: 1px solid #999;
+}
+
+div.widgetBox.reviews.oegdprbase_account_reviewlist div.refineParams {
+    text-align: center;
+}
+
+div.widgetBox.reviews.oegdprbase_account_reviewlist div.pager {
+    float: none;
+    background: none;
+}
+
+div.widgetBox.reviews.oegdprbase_account_reviewlist a.next {
+    float: right;
+}
+
+div.widgetBox.reviews.oegdprbase_account_reviewlist a.prev {
+    float: left;
+}
+
+div.widgetBox.reviews.oegdprbase_account_reviewlist .removeButton span {
+    float: none;
+    margin-right: 0;
+}
+
+div.widgetBox.reviews.oegdprbase_account_reviewlist ul.rating li {
+    cursor: default;
+}
