@@ -78,10 +78,6 @@ class oeGdprBaseOxUserTest extends OxidTestCase
         $user->load($userId);
         $bSuccess = $user->delete();
 
-        $this->assertEquals(true, $bSuccess);
-
-        $this->assertEquals(true, $bSuccess);
-
         $what = array(
             'oxorder'        => 'oxuserid',
             'oxuserpayments' => 'oxuserid',
