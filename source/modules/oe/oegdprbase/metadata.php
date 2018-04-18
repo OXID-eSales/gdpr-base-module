@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OXID eSales GDPR base module.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @link          http://www.oxid-esales.com
+ * @link      http://www.oxid-esales.com
  * @copyright (C) OXID eSales AG 2003-2018
  */
 
@@ -133,9 +133,5 @@ $aModule = array(
             'type'  => 'bool',
             'value' => 'true'
         ),
-    ),
-    'events'      => array(
-        'onActivate'   => 'oeGdprBaseModule::onActivate',
-        'onDeactivate' => 'oeGdprBaseModule::onDeactivate',
-    ),
+    )
 );

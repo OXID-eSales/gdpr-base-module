@@ -1,17 +1,529 @@
-INSERT INTO `oxuser` (`OXID`,     `OXACTIVE`, `OXRIGHTS`, `OXSHOPID`,    `OXUSERNAME`,         `OXPASSWORD`,                       `OXPASSSALT`,        `OXCUSTNR`, `OXUSTID`, `OXCOMPANY`,             `OXFNAME`,                 `OXLNAME`,      `OXSTREET`,         `OXSTREETNR`, `OXADDINFO`,                `OXCITY`,            `OXCOUNTRYID`,                `OXZIP`, `OXFON`, `OXFAX`, `OXSAL`, `OXBONI`, `OXCREATE`,            `OXREGISTER`,          `OXPRIVFON`, `OXMOBFON`, `OXBIRTHDATE`, `OXURL`, `OXUPDATEKEY`, `OXUPDATEEXP`) VALUES
-                     ('testuser',  1,         'user',      'oxbaseshop', 'testing_account@oxid-esales.dev', 'c9dadd994241c9e5fa6469547009328a', '7573657275736572',   8,         '',        '', 'Testing user first name', 'Testing user last name', 'Musterstr.', '1',          'Testing acc for Selenium', 'Musterstadt', 'a7c40f631fc920687.20179984', '79098', '',      '',      'MR',    500,      '2008-02-05 14:42:42', '2008-02-05 14:42:42', '',          '',         '0000-00-00',  '',      '',            0);
+REPLACE INTO `oxuser`
+SET
+  `OXID`        = 'oegdprbasetestuser',
+  `OXACTIVE`    = 1,
+  `OXRIGHTS`    = 'user',
+  `OXSHOPID`    = 1,
+  `OXUSERNAME`  = 'testing_account@oxid-esales.dev',
+  `OXPASSWORD`  = '13d726b9144af35f87b353e86185246fa4dc763f059d01e482d1360765ff3db96ec143df98c14df28b8d9414d40b5f32d090280c7d405a90d27de7f414437d7a',
+  `OXPASSSALT`  = '8f9c890adba62e6b8610544792b9eecc',
+  `OXCUSTNR`    = 1000,
+  `OXFNAME`     = 'FirstName',
+  `OXLNAME`     = 'LastName',
+  `OXSTREET`    = 'StreetName',
+  `OXSTREETNR`  = 'StreetNr',
+  `OXZIP`       = '79098',
+  `OXCITY`      = 'Freiburg',
+  `OXCOUNTRYID` = 'a7c40f631fc920687.20179984',
+  `OXCREATE`    = '2000-01-01 00:00:00',
+  `OXREGISTER`  = '2000-01-01 00:00:00',
+  `OXBIRTHDATE` = '2000-01-01';
 
-INSERT INTO `oxratings` (`OXID`,`OXSHOPID`,`OXUSERID`,`OXTYPE`,`OXOBJECTID`,`OXRATING`,`OXTIMESTAMP`) VALUES
-('8dcdd46ac5d720e60e95f058cdd95fb9','oxbaseshop','testuser','oxarticle','f4fe052346b4ec271011e25c052682c5',4,'2018-04-04 09:57:40'),
-('1d56e177b8f1eeb3e61c6d0a4a6dfe89','oxbaseshop','testuser','oxarticle','d86e244c8114c8214fbf83da8d6336b3',5,'2018-04-04 10:23:51'),
-('df7385814d49da7881f2061b5db9b6ca','oxbaseshop','testuser','oxarticle','f4fc98f99e3660bd2ecd7450f832c41a',1,'2018-04-04 10:24:04'),
-('944a79c9b11fed238e679da85d0c6ee3','oxbaseshop','testuser','oxarticle','05848170643ab0deb9914566391c0c63',4,'2018-04-04 10:25:27'),
-('44f849b707ab5d8d886cf7954ef71050','oxbaseshop','testuser','oxarticle','10002696d80479437dda4882c77b3bd8',2,'2018-04-04 10:25:50'),
-('ea00f3394fccb0c53d2cdd86bb66473f','oxbaseshop','testuser','oxarticle','oiaa81b5e002fc2f73b9398c361c0b97',3,'2018-04-04 10:26:41'),
-('d6df275f54b4be71a47c1dd476098e13','oxbaseshop','testuser','oxarticle','6b6efaa522be53c3e86fdb41f0542a8a',2,'2018-04-04 10:27:27'),
-('cfeb3861b5c074cd096f6fa408b87f69','oxbaseshop','testuser','oxarticle','fc71f70c3398ee4c2cdd101494087185',5,'2018-04-04 10:28:07');
+REPLACE INTO `oxaddress`
+SET
+  `OXID`            = 'oegdprbaseaddress1',
+  `OXUSERID`        = 'oegdprbasetestuser',
+  `OXADDRESSUSERID` = '',
+  `OXFNAME`         = 'FirstName',
+  `OXLNAME`         = 'LastName',
+  `OXSTREET`        = 'StreetName',
+  `OXSTREETNR`      = 'StreetNr',
+  `OXZIP`           = '79098',
+  `OXCITY`          = 'Freiburg',
+  `OXCOUNTRYID`     = 'a7c40f631fc920687.20179984';
 
-INSERT INTO `oxreviews` (`OXID`,`OXACTIVE`,`OXOBJECTID`,`OXTYPE`,`OXTEXT`,`OXUSERID`,`OXCREATE`,`OXLANG`,`OXRATING`,`OXTIMESTAMP`) VALUES
-('190422848ae7c366504d3402a1acd86f',0,'6b6e2c7af07fd2b9d82223ff35f4e08f','oxarticle','Great','testuser','2018-04-04 10:26:07',1,0,'2018-04-04 10:26:07'),
-('86d4612ca58cdc7f959f5457e7667a50',0,'adcb9deae73557006a8ac748f45288b4','oxarticle','Great','testuser','2018-04-04 10:26:25',1,0,'2018-04-04 10:26:25'),
-('2fc03441cbbbcc64b409fc56d81d0773',0,'oiaa81b5e002fc2f73b9398c361c0b97','oxarticle','Nice!','testuser','2018-04-04 10:26:41',1,3,'2018-04-04 10:26:41');
+REPLACE INTO `oxaddress`
+SET
+  `OXID`            = 'oegdprbaseaddress2',
+  `OXUSERID`        = 'oegdprbasetestuser',
+  `OXADDRESSUSERID` = '',
+  `OXFNAME`         = 'FirstName',
+  `OXLNAME`         = 'LastName',
+  `OXSTREET`        = 'StreetName',
+  `OXSTREETNR`      = 'StreetNr',
+  `OXZIP`           = '79098',
+  `OXCITY`          = 'Freiburg',
+  `OXCOUNTRYID`     = 'a7c40f631fc920687.20179984';
+
+REPLACE INTO `oxaddress`
+SET
+  `OXID`            = 'oegdprbaseaddress3',
+  `OXUSERID`        = 'oegdprbasetestuser',
+  `OXADDRESSUSERID` = '',
+  `OXFNAME`         = 'FirstName',
+  `OXLNAME`         = 'LastName',
+  `OXSTREET`        = 'StreetName',
+  `OXSTREETNR`      = 'StreetNr',
+  `OXZIP`           = '79098',
+  `OXCITY`          = 'Freiburg',
+  `OXCOUNTRYID`     = 'a7c40f631fc920687.20179984';
+
+REPLACE INTO `oxratings`
+SET
+  `OXID`       = 'oegdprbasetestrating1',
+  `OXSHOPID`   = 1,
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXTYPE`     = 'oxarticle',
+  `OXOBJECTID` = 'oegdprbasetestproduct1',
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxratings`
+SET
+  `OXID`       = 'oegdprbasetestrating2',
+  `OXSHOPID`   = 1,
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXTYPE`     = 'oxarticle',
+  `OXOBJECTID` = 'oegdprbasetestproduct2',
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxratings`
+SET
+  `OXID`       = 'oegdprbasetestrating3',
+  `OXSHOPID`   = 1,
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXTYPE`     = 'oxarticle',
+  `OXOBJECTID` = 'oegdprbasetestproduct3',
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxratings`
+SET
+  `OXID`       = 'oegdprbasetestrating4',
+  `OXSHOPID`   = 1,
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXTYPE`     = 'oxarticle',
+  `OXOBJECTID` = 'oegdprbasetestproduct4',
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxratings`
+SET
+  `OXID`       = 'oegdprbasetestrating5',
+  `OXSHOPID`   = 1,
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXTYPE`     = 'oxarticle',
+  `OXOBJECTID` = 'oegdprbasetestproduct5',
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxratings`
+SET
+  `OXID`       = 'oegdprbasetestrating6',
+  `OXSHOPID`   = 1,
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXTYPE`     = 'oxarticle',
+  `OXOBJECTID` = 'oegdprbasetestproduct6',
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxratings`
+SET
+  `OXID`       = 'oegdprbasetestrating7',
+  `OXSHOPID`   = 1,
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXTYPE`     = 'oxarticle',
+  `OXOBJECTID` = 'oegdprbasetestproduct7',
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxratings`
+SET
+  `OXID`       = 'oegdprbasetestrating8',
+  `OXSHOPID`   = 1,
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXTYPE`     = 'oxarticle',
+  `OXOBJECTID` = 'oegdprbasetestproduct8',
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxratings`
+SET
+  `OXID`       = 'oegdprbasetestrating9',
+  `OXSHOPID`   = 1,
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXTYPE`     = 'oxarticle',
+  `OXOBJECTID` = 'oegdprbasetestproduct9',
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxratings`
+SET
+  `OXID`       = 'oegdprbasetestrating10',
+  `OXSHOPID`   = 1,
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXTYPE`     = 'oxarticle',
+  `OXOBJECTID` = 'oegdprbasetestproduct10',
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxratings`
+SET
+  `OXID`       = 'oegdprbasetestrating11',
+  `OXSHOPID`   = 1,
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXTYPE`     = 'oxarticle',
+  `OXOBJECTID` = 'oegdprbasetestproduct11',
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxreviews`
+SET
+  `OXID`       = 'oegdprbasetestreview1',
+  `OXACTIVE`   = 1,
+  `OXOBJECTID` = 'oegdprbasetestproduct1',
+  `OXTYPE`     = 'oxarticle',
+  `OXTEXT`     = 'Great',
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXCREATE`   = '2000-01-01 00:00:00',
+  `OXLANG`     = 1,
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxreviews`
+SET
+  `OXID`       = 'oegdprbasetestreview2',
+  `OXACTIVE`   = 1,
+  `OXOBJECTID` = 'oegdprbasetestproduct2',
+  `OXTYPE`     = 'oxarticle',
+  `OXTEXT`     = 'Great',
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXCREATE`   = '2000-01-01 00:00:00',
+  `OXLANG`     = 1,
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxreviews`
+SET
+  `OXID`       = 'oegdprbasetestreview3',
+  `OXACTIVE`   = 1,
+  `OXOBJECTID` = 'oegdprbasetestproduct3',
+  `OXTYPE`     = 'oxarticle',
+  `OXTEXT`     = 'Great',
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXCREATE`   = '2000-01-01 00:00:00',
+  `OXLANG`     = 1,
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxreviews`
+SET
+  `OXID`       = 'oegdprbasetestreview4',
+  `OXACTIVE`   = 1,
+  `OXOBJECTID` = 'oegdprbasetestproduct4',
+  `OXTYPE`     = 'oxarticle',
+  `OXTEXT`     = 'Great',
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXCREATE`   = '2000-01-01 00:00:00',
+  `OXLANG`     = 1,
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxreviews`
+SET
+  `OXID`       = 'oegdprbasetestreview5',
+  `OXACTIVE`   = 1,
+  `OXOBJECTID` = 'oegdprbasetestproduct5',
+  `OXTYPE`     = 'oxarticle',
+  `OXTEXT`     = 'Great',
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXCREATE`   = '2000-01-01 00:00:00',
+  `OXLANG`     = 1,
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxreviews`
+SET
+  `OXID`       = 'oegdprbasetestreview6',
+  `OXACTIVE`   = 1,
+  `OXOBJECTID` = 'oegdprbasetestproduct6',
+  `OXTYPE`     = 'oxarticle',
+  `OXTEXT`     = 'Great',
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXCREATE`   = '2000-01-01 00:00:00',
+  `OXLANG`     = 1,
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxreviews`
+SET
+  `OXID`       = 'oegdprbasetestreview7',
+  `OXACTIVE`   = 1,
+  `OXOBJECTID` = 'oegdprbasetestproduct7',
+  `OXTYPE`     = 'oxarticle',
+  `OXTEXT`     = 'Great',
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXCREATE`   = '2000-01-01 00:00:00',
+  `OXLANG`     = 1,
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxreviews`
+SET
+  `OXID`       = 'oegdprbasetestreview8',
+  `OXACTIVE`   = 1,
+  `OXOBJECTID` = 'oegdprbasetestproduct8',
+  `OXTYPE`     = 'oxarticle',
+  `OXTEXT`     = 'Great',
+  `OXUSERID`   = 'oegdprbasetestuser',
+  `OXCREATE`   = '2000-01-01 00:00:00',
+  `OXLANG`     = 1,
+  `OXRATING`   = 1;
+
+REPLACE INTO `oxarticles`
+SET
+  `OXID`           = 'oegdprbasetestproduct1',
+  `OXSHOPID`       = 'oxbaseshop',
+  `OXACTIVE`       = 1,
+  `OXACTIVEFROM`   = '2000-01-01 00:00:00',
+  `OXACTIVETO`     = '2099-01-01 00:00:00',
+  `OXARTNUM`       = '0000001',
+  `OXTITLE`        = 'test product 1',
+  `OXSHORTDESC`    = '',
+  `OXTITLE_1`      = 'test product 1',
+  `OXSHORTDESC_1`  = '',
+  `OXPRICE`        = 100,
+  `OXBLFIXEDPRICE` = 0,
+  `OXPRICEA`       = 0,
+  `OXPRICEB`       = 0,
+  `OXPRICEC`       = 0,
+  `OXBPRICE`       = 0,
+  `OXPIC1`         = 'nopic.jpg',
+  `OXSTOCK`        = 1000,
+  `OXINSERT`       = '2018-01-01',
+  `OXDELIVERY`     = '2018-01-01',
+  `OXSUBCLASS`     = 'oxarticle',
+  `OXSTOCKFLAG`    = 1;
+
+REPLACE INTO `oxarticles`
+SET
+  `OXID`           = 'oegdprbasetestproduct2',
+  `OXSHOPID`       = 'oxbaseshop',
+  `OXACTIVE`       = 1,
+  `OXACTIVEFROM`   = '2000-01-01 00:00:00',
+  `OXACTIVETO`     = '2099-01-01 00:00:00',
+  `OXARTNUM`       = '0000001',
+  `OXTITLE`        = 'test product 2',
+  `OXSHORTDESC`    = '',
+  `OXTITLE_1`      = 'test product 2',
+  `OXSHORTDESC_1`  = '',
+  `OXPRICE`        = 100,
+  `OXBLFIXEDPRICE` = 0,
+  `OXPRICEA`       = 0,
+  `OXPRICEB`       = 0,
+  `OXPRICEC`       = 0,
+  `OXBPRICE`       = 0,
+  `OXPIC1`         = 'nopic.jpg',
+  `OXSTOCK`        = 1000,
+  `OXINSERT`       = '2018-01-01',
+  `OXDELIVERY`     = '2018-01-01',
+  `OXSUBCLASS`     = 'oxarticle',
+  `OXSTOCKFLAG`    = 1;
+
+REPLACE INTO `oxarticles`
+SET
+  `OXID`           = 'oegdprbasetestproduct3',
+  `OXSHOPID`       = 'oxbaseshop',
+  `OXACTIVE`       = 1,
+  `OXACTIVEFROM`   = '2000-01-01 00:00:00',
+  `OXACTIVETO`     = '2099-01-01 00:00:00',
+  `OXARTNUM`       = '0000001',
+  `OXTITLE`        = 'test product 3',
+  `OXSHORTDESC`    = '',
+  `OXTITLE_1`      = 'test product 3',
+  `OXSHORTDESC_1`  = '',
+  `OXPRICE`        = 100,
+  `OXBLFIXEDPRICE` = 0,
+  `OXPRICEA`       = 0,
+  `OXPRICEB`       = 0,
+  `OXPRICEC`       = 0,
+  `OXBPRICE`       = 0,
+  `OXPIC1`         = 'nopic.jpg',
+  `OXSTOCK`        = 1000,
+  `OXINSERT`       = '2018-01-01',
+  `OXDELIVERY`     = '2018-01-01',
+  `OXSUBCLASS`     = 'oxarticle',
+  `OXSTOCKFLAG`    = 1;
+
+REPLACE INTO `oxarticles`
+SET
+  `OXID`           = 'oegdprbasetestproduct4',
+  `OXSHOPID`       = 'oxbaseshop',
+  `OXACTIVE`       = 1,
+  `OXACTIVEFROM`   = '2000-01-01 00:00:00',
+  `OXACTIVETO`     = '2099-01-01 00:00:00',
+  `OXARTNUM`       = '0000001',
+  `OXTITLE`        = 'test product 4',
+  `OXSHORTDESC`    = '',
+  `OXTITLE_1`      = 'test product 4',
+  `OXSHORTDESC_1`  = '',
+  `OXPRICE`        = 100,
+  `OXBLFIXEDPRICE` = 0,
+  `OXPRICEA`       = 0,
+  `OXPRICEB`       = 0,
+  `OXPRICEC`       = 0,
+  `OXBPRICE`       = 0,
+  `OXPIC1`         = 'nopic.jpg',
+  `OXSTOCK`        = 1000,
+  `OXINSERT`       = '2018-01-01',
+  `OXDELIVERY`     = '2018-01-01',
+  `OXSUBCLASS`     = 'oxarticle',
+  `OXSTOCKFLAG`    = 1;
+
+REPLACE INTO `oxarticles`
+SET
+  `OXID`           = 'oegdprbasetestproduct5',
+  `OXSHOPID`       = 'oxbaseshop',
+  `OXACTIVE`       = 1,
+  `OXACTIVEFROM`   = '2000-01-01 00:00:00',
+  `OXACTIVETO`     = '2099-01-01 00:00:00',
+  `OXARTNUM`       = '0000001',
+  `OXTITLE`        = 'test product 5',
+  `OXSHORTDESC`    = '',
+  `OXTITLE_1`      = 'test product 5',
+  `OXSHORTDESC_1`  = '',
+  `OXPRICE`        = 100,
+  `OXBLFIXEDPRICE` = 0,
+  `OXPRICEA`       = 0,
+  `OXPRICEB`       = 0,
+  `OXPRICEC`       = 0,
+  `OXBPRICE`       = 0,
+  `OXPIC1`         = 'nopic.jpg',
+  `OXSTOCK`        = 1000,
+  `OXINSERT`       = '2018-01-01',
+  `OXDELIVERY`     = '2018-01-01',
+  `OXSUBCLASS`     = 'oxarticle',
+  `OXSTOCKFLAG`    = 1;
+
+REPLACE INTO `oxarticles`
+SET
+  `OXID`           = 'oegdprbasetestproduct6',
+  `OXSHOPID`       = 'oxbaseshop',
+  `OXACTIVE`       = 1,
+  `OXACTIVEFROM`   = '2000-01-01 00:00:00',
+  `OXACTIVETO`     = '2099-01-01 00:00:00',
+  `OXARTNUM`       = '0000001',
+  `OXTITLE`        = 'test product 6',
+  `OXSHORTDESC`    = '',
+  `OXTITLE_1`      = 'test product 6',
+  `OXSHORTDESC_1`  = '',
+  `OXPRICE`        = 100,
+  `OXBLFIXEDPRICE` = 0,
+  `OXPRICEA`       = 0,
+  `OXPRICEB`       = 0,
+  `OXPRICEC`       = 0,
+  `OXBPRICE`       = 0,
+  `OXPIC1`         = 'nopic.jpg',
+  `OXSTOCK`        = 1000,
+  `OXINSERT`       = '2018-01-01',
+  `OXDELIVERY`     = '2018-01-01',
+  `OXSUBCLASS`     = 'oxarticle',
+  `OXSTOCKFLAG`    = 1;
+
+REPLACE INTO `oxarticles`
+SET
+  `OXID`           = 'oegdprbasetestproduct7',
+  `OXSHOPID`       = 'oxbaseshop',
+  `OXACTIVE`       = 1,
+  `OXACTIVEFROM`   = '2000-01-01 00:00:00',
+  `OXACTIVETO`     = '2099-01-01 00:00:00',
+  `OXARTNUM`       = '0000001',
+  `OXTITLE`        = 'test product 7',
+  `OXSHORTDESC`    = '',
+  `OXTITLE_1`      = 'test product 7',
+  `OXSHORTDESC_1`  = '',
+  `OXPRICE`        = 100,
+  `OXBLFIXEDPRICE` = 0,
+  `OXPRICEA`       = 0,
+  `OXPRICEB`       = 0,
+  `OXPRICEC`       = 0,
+  `OXBPRICE`       = 0,
+  `OXPIC1`         = 'nopic.jpg',
+  `OXSTOCK`        = 1000,
+  `OXINSERT`       = '2018-01-01',
+  `OXDELIVERY`     = '2018-01-01',
+  `OXSUBCLASS`     = 'oxarticle',
+  `OXSTOCKFLAG`    = 1;
+
+REPLACE INTO `oxarticles`
+SET
+  `OXID`           = 'oegdprbasetestproduct8',
+  `OXSHOPID`       = 'oxbaseshop',
+  `OXACTIVE`       = 1,
+  `OXACTIVEFROM`   = '2000-01-01 00:00:00',
+  `OXACTIVETO`     = '2099-01-01 00:00:00',
+  `OXARTNUM`       = '0000001',
+  `OXTITLE`        = 'test product 8',
+  `OXSHORTDESC`    = '',
+  `OXTITLE_1`      = 'test product 8',
+  `OXSHORTDESC_1`  = '',
+  `OXPRICE`        = 100,
+  `OXBLFIXEDPRICE` = 0,
+  `OXPRICEA`       = 0,
+  `OXPRICEB`       = 0,
+  `OXPRICEC`       = 0,
+  `OXBPRICE`       = 0,
+  `OXPIC1`         = 'nopic.jpg',
+  `OXSTOCK`        = 1000,
+  `OXINSERT`       = '2018-01-01',
+  `OXDELIVERY`     = '2018-01-01',
+  `OXSUBCLASS`     = 'oxarticle',
+  `OXSTOCKFLAG`    = 1;
+
+REPLACE INTO `oxarticles`
+SET
+  `OXID`           = 'oegdprbasetestproduct9',
+  `OXSHOPID`       = 'oxbaseshop',
+  `OXACTIVE`       = 1,
+  `OXACTIVEFROM`   = '2000-01-01 00:00:00',
+  `OXACTIVETO`     = '2099-01-01 00:00:00',
+  `OXARTNUM`       = '0000001',
+  `OXTITLE`        = 'test product 9',
+  `OXSHORTDESC`    = '',
+  `OXTITLE_1`      = 'test product 9',
+  `OXSHORTDESC_1`  = '',
+  `OXPRICE`        = 100,
+  `OXBLFIXEDPRICE` = 0,
+  `OXPRICEA`       = 0,
+  `OXPRICEB`       = 0,
+  `OXPRICEC`       = 0,
+  `OXBPRICE`       = 0,
+  `OXPIC1`         = 'nopic.jpg',
+  `OXSTOCK`        = 1000,
+  `OXINSERT`       = '2018-01-01',
+  `OXDELIVERY`     = '2018-01-01',
+  `OXSUBCLASS`     = 'oxarticle',
+  `OXSTOCKFLAG`    = 1;
+
+REPLACE INTO `oxarticles`
+SET
+  `OXID`           = 'oegdprbasetestproduct10',
+  `OXSHOPID`       = 'oxbaseshop',
+  `OXACTIVE`       = 1,
+  `OXACTIVEFROM`   = '2000-01-01 00:00:00',
+  `OXACTIVETO`     = '2099-01-01 00:00:00',
+  `OXARTNUM`       = '0000001',
+  `OXTITLE`        = 'test product 10',
+  `OXSHORTDESC`    = '',
+  `OXTITLE_1`      = 'test product 10',
+  `OXSHORTDESC_1`  = '',
+  `OXPRICE`        = 100,
+  `OXBLFIXEDPRICE` = 0,
+  `OXPRICEA`       = 0,
+  `OXPRICEB`       = 0,
+  `OXPRICEC`       = 0,
+  `OXBPRICE`       = 0,
+  `OXPIC1`         = 'nopic.jpg',
+  `OXSTOCK`        = 1000,
+  `OXINSERT`       = '2018-01-01',
+  `OXDELIVERY`     = '2018-01-01',
+  `OXSUBCLASS`     = 'oxarticle',
+  `OXSTOCKFLAG`    = 1;
+
+REPLACE INTO `oxarticles`
+SET
+  `OXID`           = 'oegdprbasetestproduct11',
+  `OXSHOPID`       = 'oxbaseshop',
+  `OXACTIVE`       = 1,
+  `OXACTIVEFROM`   = '2000-01-01 00:00:00',
+  `OXACTIVETO`     = '2099-01-01 00:00:00',
+  `OXARTNUM`       = '0000001',
+  `OXTITLE`        = 'test product 11',
+  `OXSHORTDESC`    = '',
+  `OXTITLE_1`      = 'test product 11',
+  `OXSHORTDESC_1`  = '',
+  `OXPRICE`        = 100,
+  `OXBLFIXEDPRICE` = 0,
+  `OXPRICEA`       = 0,
+  `OXPRICEB`       = 0,
+  `OXPRICEC`       = 0,
+  `OXBPRICE`       = 0,
+  `OXPIC1`         = 'nopic.jpg',
+  `OXSTOCK`        = 1000,
+  `OXINSERT`       = '2018-01-01',
+  `OXDELIVERY`     = '2018-01-01',
+  `OXSUBCLASS`     = 'oxarticle',
+  `OXSTOCKFLAG`    = 1;

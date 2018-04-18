@@ -121,17 +121,17 @@ class oeGdprBaseRatingDao
     {
         $this->database->setFetchMode(DatabaseInterface::FETCH_MODE_ASSOC);
 
-        $query = '
+        $query = "
               SELECT 
                   *
               FROM 
                   oxratings 
               WHERE 
                   oxobjectid = ?
-                  AND oxtype = "oxarticle" 
+                  AND oxtype = 'oxarticle' 
               ORDER BY 
                   oxtimestamp DESC
-        ';
+        ";
 
         return $this->database->select($query, array($productId));
     }

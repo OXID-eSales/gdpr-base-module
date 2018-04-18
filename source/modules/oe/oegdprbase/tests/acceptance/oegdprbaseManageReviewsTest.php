@@ -15,22 +15,38 @@
  * You should have received a copy of the GNU General Public License
  * along with OXID eSales GDPR base module.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @link      http://www.oxid-esales.com
+ * @link          http://www.oxid-esales.com
  * @copyright (C) OXID eSales AG 2003-2018
  */
 
-class oegdprbaseTest extends oxTestCase
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'oegdprbaseFrontendBaseTestCase.php';
+
+/**
+ * Class oegdprbaseManageReviewsTest
+ */
+class oegdprbaseManageReviewsTest extends oegdprbaseFrontendBaseTestCase
 {
+
+    /**
+     * Test the administration of reviews and ratings in the 'My Account' dashboard.
+     */
     public function testMyAccountReviews()
     {
         $this->openReviewsPage();
-        $this->checkReviewListCount(10);
-
-        $this->deleteReview();
-        $this->checkReviewListCount(9);
+        $this->assertReviewListCount(10);
+        $this->assertReviewMenuCount(11);
+        $this->clickNextPaginationPage();
+        $this->deleteFirstReview();
+        $this->assertReviewMenuCount(10);
+        $this->assertReviewListCount(10);
     }
 
-    private function checkReviewListCount($expectedReviewsCount)
+    /**
+     * Assert a given number of reviews to be visible in the reviews list.
+     *
+     * @param integer $expectedReviewsCount
+     */
+    private function assertReviewListCount($expectedReviewsCount)
     {
         $reviewsCount = $this->getXpathCount("//div[starts-with(@id,'reviewName_')]");
 
@@ -41,13 +57,34 @@ class oegdprbaseTest extends oxTestCase
         );
     }
 
-    private function deleteReview()
+    /**
+     * Assert a that a given number of reviews is displayed in the reviews badge in the 'My account' dashboard menu.
+     *
+     * @param integer $expectedReviewsCount
+     */
+    private function assertReviewMenuCount($expectedReviewsCount)
     {
-        $this->click("//button[@data-target='#delete_review_1']");
-        $this->waitForItemAppear("remove_review_1");
+        $actualReviewsCount = $this->getText("//nav[@id='account_menu']//span[@class='badge']");
+
+        $this->assertEquals(
+            $expectedReviewsCount,
+            $actualReviewsCount,
+            "Expected to see the number $expectedReviewsCount in the menu but the number $actualReviewsCount is shown."
+        );
+    }
+
+    /**
+     * Delete first review.
+     */
+    private function deleteFirstReview()
+    {
+        $this->clickAndWait("//button[@data-target='#delete_review_1']");
         $this->clickAndWait("//form[@id='remove_review_1']//button[@type='submit']");
     }
 
+    /**
+     * Open the 'My reviews' section in the 'My Account' dashboard.
+     */
     private function openReviewsPage()
     {
         $this->setConfigToAllowUserManageOwnReviews();
@@ -56,50 +93,36 @@ class oegdprbaseTest extends oxTestCase
             'testing_account@oxid-esales.dev',
             'useruser'
         );
-
         $this->openMyAccountPage();
         $this->clickAndWait("//a[@title='%OEGDPRBASE_MY_REVIEWS%']");
     }
 
     /**
-     * oxAccepetanceTestCase::loginInFrontend is designed for the azure theme. We want to use the flow theme.
-     *
-     * @param string $userName User name (email).
-     * @param string $userPass User password.
-     * @param bool   $waitForLogin
+     * Enable the administration of reviews and ratings in the module.
      */
-    public function loginInFrontend($userName, $userPass, $waitForLogin = true)
-    {
-        $this->click("//div[contains(@class, 'showLogin')]/button");
-        $this->waitForItemAppear("loginBox");
-
-        $this->type("loginEmail", $userName);
-        $this->type("loginPasword", $userPass);
-
-        $this->clickAndWait("//div[@id='loginBox']/button");
-
-        if ($waitForLogin) {
-            $this->waitForTextDisappear('%LOGIN%');
-        }
-    }
-
-    private function openMyAccountPage()
-    {
-        $this->click("//div[contains(@class, 'service-menu')]/button");
-        $this->waitForItemAppear("services");
-        $this->clickAndWait("//ul[@id='services']/li/a");
-    }
-
     private function setConfigToAllowUserManageOwnReviews()
     {
         $this->callShopSC(
-            "oxConfig", null, null, array(
+            "oxConfig",
+            null,
+            null,
+            array(
                 'blOeGdprBaseAllowUsersToManageReviews' => array(
                     'type'   => 'bool',
-                    'value'  => 1,
+                    'value'  => true,
                     'module' => 'module:oegdprbase'
                 )
             )
         );
+    }
+
+    /**
+     * Click 'Next' button in pagination
+     */
+    private function clickNextPaginationPage()
+    {
+        $paginationLocator = "//ol[contains(@class,'pagination')]";
+        $this->assertElementPresent($paginationLocator);
+        $this->click($paginationLocator . "/li[@class='next']/a");
     }
 }

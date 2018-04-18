@@ -189,22 +189,21 @@ class oeGdprBaseOxUserTest extends OxidTestCase
         $user->oxuser__oxcountryid = new oxField("testCountry", oxField::T_RAW);
         $user->save();
 
-        $uniqueId = substr('_test' . oxUtilsObject::getInstance()->generateUID(), 0, 32);
+        $groupId = $database->getOne("SELECT oxid FROM oxgroups ORDER BY rand()");
+        $query = 'REPLACE INTO oxobject2group (oxid, oxshopid, oxobjectid, oxgroupsid) VALUES (?, ?, ?, ?)';
+        $database->execute($query, array($userId, $shopId, $userId, $groupId));
 
-        $groupId = $database->getOne('SELECT oxid FROM oxgroups ORDER BY rand() ');
-        $query = 'REPLACE INTO oxobject2group (oxid, oxshopid, oxobjectid, oxgroupsid) VALUES ( "' . $userId . '", "' . $shopId . '", "' . $userId . '", "' . $groupId . '" )';
-        $database->execute($query);
-
-        $query = 'INSERT INTO oxuserbaskets ( oxid, oxuserid, oxtitle ) VALUES ( "' . $userId . '", "' . $userId . '", "oxtest" ) ';
-        $database->execute($query);
+        $query = "INSERT INTO oxuserbaskets ( oxid, oxuserid, oxtitle ) VALUES (?, ?, 'oxtest')";
+        $database->execute($query, array($userId, $userId));
 
         $articleId = $database->getOne('SELECT oxid FROM oxarticles ORDER BY rand() ');
-        $query = 'INSERT INTO oxuserbasketitems ( oxid, oxbasketid, oxartid, oxamount ) VALUES ( "' . $userId . '", "' . $userId . '", "' . $articleId . '", "1" ) ';
-        $database->execute($query);
+        $query = "INSERT INTO oxuserbasketitems ( oxid, oxbasketid, oxartid, oxamount ) VALUES (?, ?,  ?, '1')";
+        $database->execute($query, array($userId, $userId, $articleId));
 
-        $countryId = $database->getOne('SELECT oxid FROM oxcountry WHERE oxactive = "1"');
-        $query = 'INSERT INTO oxaddress ( oxid, oxuserid, oxaddressuserid, oxcountryid ) VALUES ( "test_user' . $nextUserNumber . '", "' . $userId . '", "' . $userId . '", "' . $countryId . '" ) ';
-        $database->execute($query);
+        $addressId = 'test_user' . $nextUserNumber;
+        $countryId = $database->getOne("SELECT oxid FROM oxcountry WHERE oxactive = '1'");
+        $query = "INSERT INTO oxaddress ( oxid, oxuserid, oxaddressuserid, oxcountryid ) VALUES (? ,?, ?, ?)";
+        $database->execute($query, array($addressId, $userId, $userId, $countryId));
 
         $database->execute("INSERT INTO oxacceptedterms (oxuserid) VALUES(?)", array($userId));
 

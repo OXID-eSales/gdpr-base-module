@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with OXID eSales GDPR base module.  If not, see <http://www.gnu.org/licenses/>.
  *
- * @link      http://www.oxid-esales.com
+ * @link          http://www.oxid-esales.com
  * @copyright (C) OXID eSales AG 2003-2018
  */
 
@@ -27,43 +27,25 @@
  */
 class oeGdprBaseModule extends oxModule
 {
-
     /**
      * Class constructor.
      * Sets current module main data and loads the rest module info.
      */
-    function __construct()
+    public function __construct()
     {
         $sModuleId = 'oegdprbase';
 
         $this->setModuleData(
             array(
-                 'id'          => $sModuleId,
-                 'title'       => 'OE Gdpr Base',
-                 'description' => 'OE Gdpr Base Module',
+                'id'          => $sModuleId,
+                'title'       => 'OE Gdpr Base',
+                'description' => 'OE Gdpr Base Module',
             )
         );
 
         $this->load($sModuleId);
 
         oxRegistry::set('oeGdprBaseModule', $this);
-    }
-
-
-    /**
-     * Module activation script.
-     */
-    public static function onActivate()
-    {
-//        return self::_dbEvent('install.sql', 'Error activating module: ');
-    }
-
-    /**
-     * Module deactivation script.
-     */
-    public static function onDeactivate()
-    {
-//        self::_dbEvent('uninstall.sql', 'Error deactivating module: ');
     }
 
     /**
@@ -88,6 +70,75 @@ class oeGdprBaseModule extends oxModule
         }
 
         return true;
+    }
+
+    /**
+     * Install/uninstall event.
+     * Executes SQL queries form a file.
+     *
+     * @param string $sSqlFile      SQL file located in module docs folder (usually install.sql or uninstall.sql).
+     * @param string $sFailureError An error message to show on failure.
+     *
+     * @return bool
+     */
+    protected static function _dbEvent($sSqlFile, $sFailureError = 'Operation failed: ')
+    {
+        try {
+            $oDb = oxDb::getDb();
+            $sSql = file_get_contents(dirname(__FILE__) . '/../docs/' . (string) $sSqlFile);
+            $aSql = (array) explode(';', $sSql);
+
+            foreach ($aSql as $sQuery) {
+                if (!empty($sQuery)) {
+                    $oDb->execute($sQuery);
+                }
+            }
+        } catch (Exception $ex) {
+            error_log($sFailureError . $ex->getMessage());
+        }
+
+
+        self::clearTmp();
+
+        return true;
+    }
+
+    /**
+     * Check if provided path is inside eShop `tpm/` folder or use the `tmp/` folder path.
+     *
+     * @param string $sClearFolderPath
+     *
+     * @return string
+     */
+    protected static function _getFolderToClear($sClearFolderPath = '')
+    {
+        $sTempFolderPath = (string) oxRegistry::getConfig()->getConfigParam('sCompileDir');
+
+        if (!empty($sClearFolderPath) and (strpos($sClearFolderPath, $sTempFolderPath) !== false)) {
+            $sFolderPath = $sClearFolderPath;
+        } else {
+            $sFolderPath = $sTempFolderPath;
+        }
+
+        return $sFolderPath;
+    }
+
+    /**
+     * Check if resource could be deleted, then delete it's a file or
+     * call recursive folder deletion if it's a directory.
+     *
+     * @param string $sFileName
+     * @param string $sFilePath
+     */
+    protected static function _clear($sFileName, $sFilePath)
+    {
+        if (!in_array($sFileName, array('.', '..', '.gitkeep', '.htaccess'))) {
+            if (is_file($sFilePath)) {
+                @unlink($sFilePath);
+            } else {
+                self::clearTmp($sFilePath);
+            }
+        }
     }
 
     /**
@@ -156,75 +207,5 @@ class oeGdprBaseModule extends oxModule
     public function getPath()
     {
         return oxRegistry::getConfig()->getModulesDir() . 'oe/gdprbase/';
-    }
-
-
-    /**
-     * Install/uninstall event.
-     * Executes SQL queries form a file.
-     *
-     * @param string $sSqlFile      SQL file located in module docs folder (usually install.sql or uninstall.sql).
-     * @param string $sFailureError An error message to show on failure.
-     *
-     * @return bool
-     */
-    protected static function _dbEvent($sSqlFile, $sFailureError = 'Operation failed: ')
-    {
-        try {
-            $oDb  = oxDb::getDb();
-            $sSql = file_get_contents(dirname(__FILE__) . '/../docs/' . (string) $sSqlFile);
-            $aSql = (array) explode(';', $sSql);
-
-            foreach ($aSql as $sQuery) {
-                if (!empty($sQuery)) {
-                    $oDb->execute($sQuery);
-                }
-            }
-        } catch (Exception $ex) {
-            error_log($sFailureError . $ex->getMessage());
-        }
-
-
-        self::clearTmp();
-
-        return true;
-    }
-    
-    /**
-     * Check if provided path is inside eShop `tpm/` folder or use the `tmp/` folder path.
-     *
-     * @param string $sClearFolderPath
-     *
-     * @return string
-     */
-    protected static function _getFolderToClear($sClearFolderPath = '')
-    {
-        $sTempFolderPath = (string) oxRegistry::getConfig()->getConfigParam('sCompileDir');
-
-        if (!empty($sClearFolderPath) and (strpos($sClearFolderPath, $sTempFolderPath) !== false)) {
-            $sFolderPath = $sClearFolderPath;
-        } else {
-            $sFolderPath = $sTempFolderPath;
-        }
-
-        return $sFolderPath;
-    }
-
-    /**
-     * Check if resource could be deleted, then delete it's a file or
-     * call recursive folder deletion if it's a directory.
-     *
-     * @param string $sFileName
-     * @param string $sFilePath
-     */
-    protected static function _clear($sFileName, $sFilePath)
-    {
-        if (!in_array($sFileName, array('.', '..', '.gitkeep', '.htaccess'))) {
-            if (is_file($sFilePath)) {
-                @unlink($sFilePath);
-            } else {
-                self::clearTmp($sFilePath);
-            }
-        }
     }
 }
