@@ -5,7 +5,7 @@ Module provides base functionality which is required for [GDPR](https://en.wikip
 
 ## Requirements
 
-* OXID eShop 5.3.7/4.10.7 and following/upcoming 5.3.x/4.7.x versions/releases
+* OXID eShop 5.3.7/4.10.7 and following/upcoming 5.3.x/4.10.x versions/releases
 
 ## Installation
 
