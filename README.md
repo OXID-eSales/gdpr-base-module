@@ -33,6 +33,10 @@ Module provides functionality which allows:
 * Users to delete their shipping addresses.
 * Users to delete their account.
 
+## Bugs and Issues
+
+If you experience any bugs or issues, please report them in the section **Module GDPR Base** of https://bugs.oxid-esales.com.
+
 ## License
 
 Licensing of the software product depends on the shop edition used.
